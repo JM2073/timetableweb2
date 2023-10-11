@@ -1,0 +1,89 @@
+﻿@page "/addingajob"
+@using System.Text.Json;
+@using System.IO;
+
+<h1>IT Helpdesk Database</h1>
+
+<h2>Log a Job Form</h2>
+
+<EditForm Model="@Model" OnSubmit="@Submit">
+    <div>
+        <label>
+            ID:
+            <InputText @bind-Value="Model.ticket_id" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Subject:
+            <InputText @bind-Value="Model.ticket_subject" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Subject:
+            <InputText @bind-Value="Model.ticket_description" />
+        </label>
+    </div>
+    <div>
+        <label>
+            Reported By:
+            <InputSelect @bind-Value="Model.created_by">
+                <option value="">Select ...</option>
+                <option value="JLarner">James</option>
+                <option value="GMason">Glen</option>
+                <option value="HChadwick">Hugh</option>
+            </InputSelect>
+        </label>
+    </div>
+    <div>
+        <label>
+            Priority:
+            <InputText @bind-Value="Model.priority" />
+        </label>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</EditForm>
+
+@code
+{
+    public Tickets? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+
+    private void Submit()
+    {
+        
+
+        Tickets newTicket = new Tickets();
+        newTicket.ticket_id = Model?.ticket_id;
+        newTicket.ticket_subject = Model?.ticket_subject;
+        newTicket.ticket_description = Model?.ticket_description;
+        newTicket.created_by = Model?.created_by;
+        newTicket.created_at = DateTime.Now;
+        newTicket.priority = Model?.priority;
+        newTicket.status = "Created";
+       
+
+        //Copy the contents of the JSon file into an array of tickets
+        var content = File.ReadAllText("data/itsupporthelpdesk.json");
+        Tickets[] allTickets = Newtonsoft.Json.JsonConvert.DeserializeObject<Tickets[]>(content);
+      
+
+       //Increase the size of the array
+        Array.Resize(ref allTickets, allTickets.Length + 1);
+        allTickets[allTickets.Length - 1] = newTicket;
+
+
+        //Convert back to a JSon format
+        string strJson = JsonSerializer.Serialize(allTickets);
+
+        File.WriteAllText(@"data\ITSupportHelpdesk.json", strJson);
+       
+
+
+    }
+}
