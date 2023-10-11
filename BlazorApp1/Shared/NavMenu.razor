@@ -1,6 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿<div class="top-row ps-3 navbar navbar-dark" style=" height:auto">
+    <img src="/ARU.Logo.png" alt="ARU Logo" />
     <div class="container-fluid">
-        <a class="navbar-brand" href="">BlazorApp1</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -10,28 +10,18 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+            <NavLink class="nav-link" href="">
+                <img style="height:20px; width:20px;" src="/Home.Button.jpg" aria-hidden="true" /> Home
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="AddClass">
+                <img style="height:20px; width:20px;" src="/Calendar.Button.jpg" aria-hidden="true" /> Add
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="ithelpdesk">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> View the helpdesk
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="addingajob">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Add a Job to the helpdesk
+            <NavLink class="nav-link" href="EditDeleteClass">
+                <img style ="height:20px; width:20px;" src="/Edit.Button.jpg" aria-hidden="true" /> Edit / Delete
             </NavLink>
         </div>
     </nav>

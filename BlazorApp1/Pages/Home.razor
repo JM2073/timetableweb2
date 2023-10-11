@@ -1,0 +1,430 @@
+﻿@page "/"
+@using BlazorApp1.Data
+
+<PageTitle>Home Page</PageTitle>
+
+<h1>Welcome to ARU's Class Finder'</h1>
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Calendar</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+@if (_display == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <h1>October 2023</h1>
+    <table>
+        @*Horizontal - Days*@
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Sun</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+        </tr>
+        </thead>
+        @*Vertical - Times - Each <TR> creates a new line, <TH> makes it a heading*@
+        <tbody>
+        <tr>
+            <th>09:00</th>
+
+
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 0;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+
+
+        </tr>
+        <tr>
+            <th>10:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 1;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+
+        </tr>
+        <tr>
+            <th>11:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 2;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>12:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 3;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>13:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 4;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>14:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 5;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>15:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 6;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>16:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 7;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        <tr>
+            <th>17:00</th>
+            @foreach (DayOfWeek day in  Enum.GetValues(typeof(DayOfWeek)))
+            {
+                int dayOfWeek = (int)day;
+                int TimeSlot = 8;
+                <td>
+                    <table class="table">
+                        @if (_display[TimeSlot, dayOfWeek].Count != 0)
+                        {
+                            @foreach (Lecture lecture in _display[TimeSlot, dayOfWeek])
+                            {
+                                <tr>
+                                    <td>
+                                        @lecture.courseName <br/>
+                                        @lecture.moduleName <br/>
+                                        @lecture.roomNumber <br/>
+                                        @lecture.startTime.ToShortTimeString() - @lecture.endTime.ToShortTimeString()
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table >
+                </td>
+            }
+
+        </tr>
+        </tbody>
+    </table>
+}
+
+</body>
+</html>
+
+@code {
+    private Lecture[]? lectures;
+    private readonly TimeSpan NINE_OCLOCK = new(9, 0, 0);
+    private readonly TimeSpan TEN_OCLOCK = new(10, 0, 0);
+    private readonly TimeSpan ELEVEN_OCLOCK = new(11, 0, 0);
+    private readonly TimeSpan TWELVE_OCLOCK = new(12, 0, 0);
+    private readonly TimeSpan ONE_OCLOCK = new(13, 0, 0);
+    private readonly TimeSpan TWO_OCLOCK = new(14, 0, 0);
+    private readonly TimeSpan THREE_OCLOCK = new(15, 0, 0);
+    private readonly TimeSpan FORE_OCLOCK = new(16, 0, 0);
+    private readonly TimeSpan FIVE_OCLOCK = new(17, 0, 0);
+
+    private List<Lecture>[,] _display;
+        private const int NUM_OF_DAYS = 7;
+        private const int NUM_OF_HOUR_SLOTS = 9;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        string JSONtxt = File.ReadAllText(@"Data/Lecture.json");
+        Lecture[]? lectures = Newtonsoft.Json.JsonConvert.DeserializeObject<Lecture[]>(JSONtxt);
+
+        
+
+         // creates the array to the specs size
+        _display = new List<Lecture>[NUM_OF_HOUR_SLOTS, NUM_OF_DAYS];
+
+         // gives each elment in the array a empty list else they are just created with nulls.
+        for (int x = 0; x < NUM_OF_HOUR_SLOTS; x++)
+            for (int y = 0; y < NUM_OF_DAYS; y++)
+                _display[x, y] = new List<Lecture>();
+
+        if (lectures is not null)
+        {
+            //gose though each lecture and adds it to the array of lecturer lists where it needs adding 
+            foreach (Lecture lecture in lectures)
+            {
+                switch (lecture.startTime.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        PopulateDisplayAid(lecture, 1);
+                        break;
+
+                    case DayOfWeek.Tuesday:
+                        PopulateDisplayAid(lecture, 2);
+                        break;
+
+                    case DayOfWeek.Wednesday:
+                        PopulateDisplayAid(lecture, 3);
+                        break;
+
+                    case DayOfWeek.Thursday:
+                        PopulateDisplayAid(lecture, 4);
+                        break;
+
+                    case DayOfWeek.Friday:
+                        PopulateDisplayAid(lecture, 5);
+                        break;
+
+                    case DayOfWeek.Saturday:
+                        PopulateDisplayAid(lecture, 6);
+                        break;
+
+                    case DayOfWeek.Sunday:
+                        PopulateDisplayAid(lecture, 0);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void PopulateDisplayAid(Lecture lecture, int DayOfWeek)
+    {
+        // already knowing what day slot it needs to go into this picks witch time slot this needs to go into.
+        if (lecture.startTime.TimeOfDay >= NINE_OCLOCK && lecture.startTime.TimeOfDay < TEN_OCLOCK)
+        {
+            _display[0, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TEN_OCLOCK && lecture.startTime.TimeOfDay < ELEVEN_OCLOCK)
+        {
+            _display[1, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= ELEVEN_OCLOCK && lecture.startTime.TimeOfDay < TWELVE_OCLOCK)
+        {
+            _display[2, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TWELVE_OCLOCK && lecture.startTime.TimeOfDay < ONE_OCLOCK)
+        {
+            _display[3, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= ONE_OCLOCK && lecture.startTime.TimeOfDay < TWO_OCLOCK)
+        {
+            _display[4, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= TWO_OCLOCK && lecture.startTime.TimeOfDay < THREE_OCLOCK)
+        {
+            _display[5, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= THREE_OCLOCK && lecture.startTime.TimeOfDay < FORE_OCLOCK)
+        {
+            _display[6, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= FORE_OCLOCK && lecture.startTime.TimeOfDay < FIVE_OCLOCK)
+        {
+            _display[7, DayOfWeek].Add(lecture);
+        }
+        if (lecture.startTime.TimeOfDay >= FIVE_OCLOCK)
+        {
+            _display[8, DayOfWeek].Add(lecture);
+        }
+    }
+
+}

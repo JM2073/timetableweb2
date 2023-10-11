@@ -1,0 +1,57 @@
+[
+  {
+    "courseName": "Introduction to Computer Science",
+    "moduleCode": "CS101",
+    "moduleName": "Fundamentals of Programming",
+    "lecturerName": "Dr. John Smith",
+    "roomNumber": 123,
+    "dayOfTheWeek": "Monday",
+    "ID": "123456789",
+    "startTime": "2023-10-09T09:00:00",
+    "endTime": "2023-10-09T12:20:00"
+  },
+  {
+    "courseName": "Mathematics for Engineers",
+    "moduleCode": "MATH201",
+    "moduleName": "Calculus II",
+    "lecturerName": "Prof. Sarah Johnson",
+    "roomNumber": 210,
+    "dayOfTheWeek": "Tuesday",
+    "ID": "987654321",
+    "startTime": "2023-10-10T10:30:00",
+    "endTime": "2023-10-10T12:30:00"
+  },
+  {
+    "courseName": "History of Art123123",
+    "moduleCode": "ART101123",
+    "moduleName": "Introduction to Art History123123",
+    "lecturerName": "Dr. Emily Davis123",
+    "roomNumber": 301123,
+    "dayOfTheWeek": "Wednesday",
+    "ID": "456789123",
+    "startTime": "2023-10-11T13:00:00",
+    "endTime": "2023-10-11T15:00:00"
+  },
+  {
+    "courseName": "Business Management",
+    "moduleCode": "BUS202",
+    "moduleName": "Marketing Strategies",
+    "lecturerName": "Prof. David Wilson",
+    "roomNumber": 205,
+    "dayOfTheWeek": "Thursday",
+    "ID": "789123456",
+    "startTime": "2023-10-11T13:00:00",
+    "endTime": "2023-10-11T15:00:00"
+  },
+  {
+    "courseName": "Chemistry",
+    "moduleCode": "CHEM301",
+    "moduleName": "Organic Chemistry",
+    "lecturerName": "Dr. Lisa Brown",
+    "roomNumber": 135,
+    "dayOfTheWeek": "Friday",
+    "ID": "321654987",
+    "startTime": "2023-10-13T11:30:00",
+    "endTime": "2023-10-13T13:30:00"
+  }
+]

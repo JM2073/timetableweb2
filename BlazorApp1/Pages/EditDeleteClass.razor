@@ -1,0 +1,245 @@
+﻿@page "/EditDeleteClass"
+
+
+<PageTitle>Edit / Delete Classes </PageTitle>
+
+<h1>Edit & Delete Classes</h1>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+           table {
+               border-collapse: collapse;
+               width: 100%;
+           }
+           th, td {
+               border: 1px solid #ccc;
+               padding: 10px;
+   
+           }
+           th {
+               background-color: #f2f2f2;
+   
+           }
+           td {
+               height: 80px;
+   
+           }
+             body {
+                       text-align: left;
+                       margin: 0; /* Remove default body margin */
+                   }
+           
+                   form {
+                       width: 300px;
+                       margin: 0; /* Remove margin to align the form to the left */
+                   }
+           
+                   label {
+                       display: block;
+                       margin-top: 10px;
+                       text-align: left;
+                   }
+           
+                   input {
+                       width: 100%;
+                       padding: 5px;
+                       margin-top: 5px;
+                   }
+                    .button {
+                               border: none;
+                               color: white;
+                               padding: 16px 32px;
+                               text-align: center;
+                               text-decoration: none;
+                               display: inline-block;
+                               font-size: 16px;
+                               margin: 4px 2px;
+                               transition-duration: 0.4s;
+                               cursor: pointer;
+                           }
+                   
+                           .button1 {
+                               background-color: white;
+                               color: black;
+                               border: 2px solid #4CAF50;
+                           }
+                   
+                               .button1:hover {
+                                   background-color: #4CAF50;
+                                   color: white;
+                               }
+                   
+                           .button2 {
+                               background-color: white;
+                               color: black;
+                               border: 2px solid #008CBA;
+                           }
+                   
+                               .button2:hover {
+                                   background-color: grey;
+                                   color: white;
+                               }
+    </style>
+</head>
+
+<body>
+    <h2>Search Bar</h2>
+    <input  type="text" name="q" placeholder="Search..." @bind="searchTerm" ><br/>
+    <button class="btn btn-primary" style="width: 100%" @onclick="Search">Search</button>
+<hr/>
+<h2>Editable Table</h2>
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Course Name</th>
+        <th>Teacher Name</th>
+        <th>Module Name</th>
+        <th>Module code</th>
+        <th>Day of the Week</th>
+        <th>Room Number</th>
+        <th></th>
+    </tr>
+
+        @foreach (var lectuer in DisplayLectuers)
+        {    
+        <tr>
+            <th></th>
+            <td content="true">@lectuer.courseName</td>
+            <td content="true">@lectuer.lecturerName</td>
+            <td content="true">@lectuer.moduleName</td>
+            <td content="true">@lectuer.moduleCode</td>
+            <td content="true">@lectuer.startTime.DayOfWeek.ToString()</td>
+            <td content="true">@lectuer.roomNumber</td>
+            <td content="true"><button class="btn btn-primary" style="width: 100%" @onclick='(() => StartEdit(lectuer.ID))'>Edit</button></td>
+        </tr>
+    }
+
+
+    </thead>
+</table>
+<hr/>
+<EditForm model="@lecture" OnSubmit="@FormSubmitted">
+    <DataAnnotationsValidator/>
+    <label>
+        Course Name:
+        <InputText @bind-Value="lecture.courseName" type="form-control"/>
+    </label> <br/>
+
+    <label >
+        Teachers Name:
+        <InputText @bind-Value="lecture.lecturerName" type="form-control"/>
+    </label> <br/>
+
+    <label>
+        Module Name:
+        <InputText @bind-Value="lecture.moduleName" type="form-control"/>
+    </label> <br/>
+
+    <label>
+        Room Number:
+        <InputNumber @bind-Value="lecture.roomNumber" type="form-control"/>
+    </label> <br/>
+
+    <label>
+        Module Code:
+        <InputText @bind-Value="lecture.moduleCode" type="form-control"/>
+    </label> <br/>
+
+
+    <label>
+        Day of Lecture:
+        <input @bind="lecture.startTime" type="date"/>
+    </label>
+    <label>
+        Start Time:
+        <input @bind="lecture.startTime" type="time"/>
+    </label>
+    <label>
+        End Time:
+        <input @bind="lecture.endTime" type="time"/>
+    </label>
+    
+    <input type="submit" class="btn btn-primary AddButton" value="Save Changes"/>
+    <input class="btn btn-primary" @onclick="() => Delete(lecture.ID)" value="Delete"/>
+
+</EditForm>
+
+</body>
+
+</html>
+
+@code {
+    private Lecture[]? AllLectures;
+    private Lecture[]? DisplayLectuers;
+    private Lecture lecture = new Lecture();
+    private LectureControls service => new();
+    private string searchTerm;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        populateAllLectuers();
+    }
+
+    private void Search()
+    {
+        if (AllLectures != null && string.IsNullOrWhiteSpace(searchTerm) == false)
+        {
+            DisplayLectuers = (Lecture[]?)service.SearchLectures(AllLectures, searchTerm).Clone();
+        }
+        else
+        {
+            DisplayLectuers = AllLectures;
+        }
+    }
+
+    private void Delete(string Id)
+    {
+        service.DeleteLecture(Id);
+        lecture = new Lecture();
+        populateAllLectuers();
+        Search();
+
+    }
+    
+    private void StartEdit(string Id)
+    {
+        lecture = AllLectures.Single(x => x.ID == Id);
+    }
+
+    string LastSubmitResult;
+
+  
+    void FormSubmitted(EditContext editContext)
+    {
+        Lecture lecture = (Lecture)editContext.Model;
+
+        bool formIsValid = editContext.Validate();
+        LastSubmitResult =
+            formIsValid
+                ? "Success - form was valid"
+                : "Failure - form was invalid";
+
+        if (formIsValid is true && lecture.ID != null)
+        {
+            service.UpdateLecture(lecture.courseName, lecture.moduleCode, lecture.moduleName, lecture.lecturerName, lecture.roomNumber, lecture.dayOfTheWeek, lecture.startTime, lecture.endTime, lecture.ID);
+            populateAllLectuers();
+            Search();
+        }
+    }
+
+    void populateAllLectuers()
+    {
+        string JSONtxt = File.ReadAllText(@"Data/Lecture.json");
+        AllLectures = Newtonsoft.Json.JsonConvert.DeserializeObject<Lecture[]>(JSONtxt);
+        if (AllLectures is not null)
+        {
+            DisplayLectuers = (Lecture[]?)AllLectures.Clone();
+        }
+    }
+
+
+}
